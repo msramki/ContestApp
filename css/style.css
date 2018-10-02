@@ -1,0 +1,22 @@
+.form-check-input{
+    margin-left:0px !important;
+}
+.blink_me {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {  
+  50% { opacity: 0; }
+}
+.ck-editor__editable_inline{
+    height:300px;
+}
+
+label.required::after {
+  content: '*';
+  margin-left: 4px;
+  color: #ff732d;
+}
+.error{
+    color:red;
+}
