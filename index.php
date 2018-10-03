@@ -140,16 +140,16 @@
                 <label for="status" class="col-sm-2 col-form-label">Marital Status</label>
                 <div class="col-sm-10">
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" id="single" name="status" value="single" checked="true">
+                    <input class="form-check-input" type="radio" id="single" name="status" value="single" checked="true" onchange="toggleWeddingAnniversary()">
                     <label class="form-check-label" for="language">Single</label>
                   </div>
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" id="married" name="status" value="married">
+                    <input class="form-check-input" type="radio" id="married" name="status" value="married" text="Married" onchange="toggleWeddingAnniversary()">
                     <label class="form-check-label" for="language">Married</label>
                   </div>
                 </div>
               </div>
-              <div class="form-group row wed-status">
+              <div id='weddingannivrow' class="form-group row wed-status">
                 <label for="wedding_anniversary" class="col-sm-2 col-form-label">Wedding Anniversary</label>
                 <div class="col-sm-10">
                   <input type="date" class="form-control" id="wedding_anniversary" name="wedding_anniversary" placeholder="Wedding Anniversary">
@@ -191,7 +191,7 @@
                 <label for="blogurl" class="col-sm-2 col-form-label">Language</label>
                 <div class="col-sm-10">
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" id="english" name="language" value="english">
+                    <input class="form-check-input" type="radio" id="english" name="language" value="english" checked="true">
                     <label class="form-check-label" for="language">English</label>
                   </div>
                   <div class="form-check form-check-inline">
