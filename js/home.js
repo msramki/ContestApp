@@ -19,6 +19,11 @@ function toggleWeddingAnniversary() {
     // }
 }
 
+function isEmail(email) {
+    var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    return regex.test(email);
+}
+
 function validate() {
     var contName = document.getElementById('name').value;
     var dob = document.getElementById('dob').value;
@@ -52,6 +57,41 @@ function validate() {
     console.log('Blog : ', blogurl);
     console.log('Language : ', english ? 'English' : tamil ? 'Tamil' : 'Hindi');
     console.log('Article : ', article);
+
+
+    $.ajax({
+        url: 'php/validate_contact.php',
+        type: 'POST',
+        data: { "contactNo": "1" },
+        success: function (response) {
+            var isContactOK = response;
+            if (isContactOK == 'OK') {
+                $.ajax({
+                    url: 'php/db_connection.php',
+                    type: 'POST',
+                    data: {
+                        "Name": name, "Dob": dob, "Gender": (maleStatus ? 'Male' : 'Female'),
+                        "Contact": contactno, "Email": email, "MarriageStatus": (singlestatus  ? 'Single' : 'Married'),
+                        "WeddingAnniv": wedding_anniversary, "FbUrl": facebookurl, "TwUrl": twitterurl, "LinkUrl": linkedinurl,
+                        "WebUrl": websiteurl, "Blog": blogurl, "Lang": (english ? 'English' : tamil ? 'Tamil' : 'Hindi'),
+                        "Article": article
+                    },
+                    success: function (saveresponse) {
+                        console.log(saveresponse)
+                    },
+                });
+                $.ajax({
+                    url: 'php/send_email.php',
+                    type: 'GET',
+                    data: {},
+                    success: function (response) {
+                        alert(response);
+                    },
+                });
+            }
+        },
+    });
+
 
     return false;
 

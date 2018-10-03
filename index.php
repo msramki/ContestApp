@@ -97,7 +97,7 @@
         <div class="row">
           <div class="col-md-3"></div>
           <div class="col-md-6">
-            <form method="POST" id="contestants" action="php/form-process.php">
+            <form>
               <h4 class="center">Personal Details</h4>
               <div class="form-group row">
                 <label for="name" class="col-sm-2 col-form-label required">Name</label>
