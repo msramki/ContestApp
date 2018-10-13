@@ -22,7 +22,7 @@
 
   <!-- Fonts icons -->
   <link rel="stylesheet" href="css/font-awesome.min.css">
-
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
 
 <body>
@@ -97,25 +97,25 @@
         <div class="row">
           <div class="col-md-3"></div>
           <div class="col-md-6">
-            <form method="POST" id="contestants" action="php/form-process.php">
+            <form>
               <h4 class="center">Personal Details</h4>
               <div class="form-group row">
                 <label for="name" class="col-sm-2 col-form-label required">Name</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" id="name" name="name">
+                  <input type="text" class="form-control" id="name" name="name" placeholder="Name" maxlength="50"  onkeypress="return isAlpha(event)">
                 </div>
               </div>
               <div class="form-group row">
-                <label for="dob" class="col-sm-2 col-form-label">DOB</label>
+                <label for="dob" class="col-sm-2 col-form-label required">DOB</label>
                 <div class="col-sm-10">
-                  <input type="date" class="form-control" id="dob" placeholder="DOB">
+                  <input type="text" class="form-control" id="dob" placeholder="DOB"  maxlength="10" readonly>
                 </div>
               </div>
               <div class="form-group row">
-                <label for="blogurl" class="col-sm-2 col-form-label">Gender</label>
+                <label for="blogurl" class="col-sm-2 col-form-label required">Gender</label>
                 <div class="col-sm-10">
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" id="male" name="gender" value="male">
+                    <input class="form-check-input" type="radio" id="male" name="gender" value="male" checked="true">
                     <label class="form-check-label" for="language">Male</label>
                   </div>
                   <div class="form-check form-check-inline">
@@ -125,73 +125,73 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label for="contactno" class="col-sm-2 col-form-label">Contact No</label>
+                <label for="contactno" class="col-sm-2 col-form-label required">Contact No</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" id="contactno" name="contactno" placeholder="Contact No">
+                  <input type="text" class="form-control" id="contactno" name="contactno" placeholder="Contact No"  maxlength="20" onkeypress="return isNumber(event)">
                 </div>
               </div>
               <div class="form-group row">
-                <label for="contactno" class="col-sm-2 col-form-label">Email</label>
+                <label for="Email" class="col-sm-2 col-form-label required">Email</label>
                 <div class="col-sm-10">
-                  <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                  <input type="text" class="form-control" id="email" name="email" placeholder="Email"  maxlength="60">
                 </div>
               </div>
               <div class="form-group row">
-                <label for="status" class="col-sm-2 col-form-label">Marital Status</label>
+                <label for="status" class="col-sm-2 col-form-label required">Marital Status</label>
                 <div class="col-sm-10">
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" id="single" name="status" value="single">
+                    <input class="form-check-input" type="radio" id="single" name="status" value="single" checked="true">
                     <label class="form-check-label" for="language">Single</label>
                   </div>
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" id="married" name="status" value="married">
+                    <input class="form-check-input" type="radio" id="married" name="status" value="married" text="Married">
                     <label class="form-check-label" for="language">Married</label>
                   </div>
                 </div>
               </div>
-              <div class="form-group row wed-status">
-                <label for="wedding-anniversary" class="col-sm-2 col-form-label">Wedding Anniversary</label>
+              <div id='weddingannivrow' class="form-group row wed-status">
+                <label for="wedding_anniversary" class="col-sm-2 col-form-label">Wedding Anniversary</label>
                 <div class="col-sm-10">
-                  <input type="date" class="form-control" id="wedding-anniversary" name="wedding-anniversary" placeholder="Wedding Anniversary">
+                  <input type="text" class="form-control" id="wedding_anniversary" name="wedding_anniversary" placeholder="Wedding Anniversary"  maxlength="10" readonly>
                 </div>
               </div>
               <h4 class="center">Social Media Link</h4>
               <div class="form-group row">
-                <label for="dob" class="col-sm-2 col-form-label">Facebook Url</label>
+                <label for="facebookurl" class="col-sm-2 col-form-label">Facebook Url</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" name="facebookurl" id="facebookurl" placeholder="DOB">
+                  <input type="text" class="form-control" name="facebookurl" id="facebookurl" placeholder="Facebook URL"  maxlength="300">
                 </div>
               </div>
               <div class="form-group row">
                 <label for="twitterurl" class="col-sm-2 col-form-label">Twitter URL</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" id="twitterurl" name="twitterurl" placeholder="Twitter URL">
+                  <input type="text" class="form-control" id="twitterurl" name="twitterurl" placeholder="Twitter URL" maxlength="300">
                 </div>
               </div>
               <div class="form-group row">
                 <label for="linkedinurl" class="col-sm-2 col-form-label">LinkedIn URL</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" name="linkedinurl" id="linkedinurl" placeholder="LinkedIn URL">
+                  <input type="text" class="form-control" name="linkedinurl" id="linkedinurl" placeholder="LinkedIn URL" maxlength="300">
                 </div>
               </div>
               <div class="form-group row">
                 <label for="websiteurl" class="col-sm-2 col-form-label">Website URL</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" name="websiteurl" id="websiteurl" placeholder="Website URL">
+                  <input type="text" class="form-control" name="websiteurl" id="websiteurl" placeholder="Website URL" maxlength="300">
                 </div>
               </div>
               <div class="form-group row">
                 <label for="blogurl" class="col-sm-2 col-form-label">Blog URL</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" name="blogurl" id="blogurl" placeholder="Blog URL">
+                  <input type="text" class="form-control" name="blogurl" id="blogurl" placeholder="Blog URL" maxlength="300">
                 </div>
               </div>
               <h4 class="center">Online Contest</h4>
               <div class="form-group row">
-                <label for="blogurl" class="col-sm-2 col-form-label">Language</label>
+                <label for="blogurl" class="col-sm-2 col-form-label required">Language</label>
                 <div class="col-sm-10">
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" id="english" name="language" value="english">
+                    <input class="form-check-input" type="radio" id="english" name="language" value="english" checked="true">
                     <label class="form-check-label" for="language">English</label>
                   </div>
                   <div class="form-check form-check-inline">
@@ -206,18 +206,18 @@
               </div>
               <div class="form-group row">
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject / Title Name">
+                  <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject / Title Name"  maxlength="300">
                 </div>
               </div>
               <div class="form-group row">
                 <div class="col-sm-12">
-                  <textarea class="form-control" name="article" rows="16" id="article">
+                  <textarea class="form-control" name="article" rows="20" id="article"  maxlength="1500">
                   </textarea>
                 </div>
               </div>
               <div class="form-group row">
                 <div class="col-sm-10">
-                  <button type="submit" class="btn btn-primary">Sign in</button>
+                  <button type="submit" class="btn btn-primary" onclick="return validate()">Submit</button>
                 </div>
               </div>
             </form>
@@ -234,10 +234,10 @@
 
   <!-- jQuery first, then Tether, then Bootstrap JS. -->
   <script src="js/jquery.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="js/tether.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/owl.carousel.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
   <script src="js/main.js"></script>
   <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
   <script src="js/home.js"></script>
