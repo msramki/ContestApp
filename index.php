@@ -211,7 +211,7 @@
               </div>
               <div class="form-group row">
                 <div class="col-sm-12">
-                  <textarea class="form-control" name="article" rows="20" id="article"  maxlength="1500">
+                  <textarea class="form-control" name="article" rows="20" id="article"  maxlength="2000">
                   </textarea>
                 </div>
               </div>
