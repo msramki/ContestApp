@@ -9,13 +9,13 @@ try {
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     //$sql = "select * from contestdetail";
-    $sql = "INSERT INTO contestdetail('Name', 'Dob', 'Gender', 'ContactNo',
-     'Email', 'MaritalStatus', 'WedAnniv', 'facebookurl', 'twitterurl', 'linkedinurl', 
-     'websiteurl', 'blogurl', 'languagepreferred', 'article') 
-     VALUES ('".$_POST['Name']."','".$_POST['Name']."','".$_POST['Name']."','".$_POST['Name']."','
-     ".$_POST['Name']."','".$_POST['Name']."','".$_POST['Name']."','".$_POST['Name']."',
-     '".$_POST['Name']."','".$_POST['Name']."','".$_POST['Name']."','".$_POST['Name']."',
-     '".$_POST['Name']."','".$_POST['Name']."')";
+    $sql = "INSERT INTO 'contestdetail'
+    ('CandidateName', 'DOB', 'Gender', 'ContactNo', 'EmailId', 'MaritialStatus', 
+    'WedAnniv', 'Fburl', 'Twurl', 'Linurl', 'Weburl', 'Blogurl', 'Language', 'SubjectTitl', 
+    'ArticleText') VALUES ('".$_POST['Name']."','".$_POST['DOB']."','".$_POST['Gender']."',
+    '".$_POST['ContactNo']."','".$_POST['EmailId']."','".$_POST['MaritialStatus']."','".$_POST['WedAnniv']."',
+    '".$_POST['Fburl']."','".$_POST['Twurl']."','".$_POST['Linurl']."','".$_POST['Weburl']."',
+    '".$_POST['Blogurl']."','".$_POST['Language']."','".$_POST['SubjectTitl']."','".$_POST['ArticleText']."')";
     // use exec() because no results are returned
     $conn->exec($sql);
     echo "New record created successfully";

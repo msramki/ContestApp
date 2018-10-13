@@ -4,95 +4,166 @@
 //     console.error( error );
 // } );
 
-
-function toggleWeddingAnniversary() {
-    // var singlestatus = document.getElementById('single').checked;
-    // var weddingannivrow = document.getElementById('weddingannivrow')
-    // if(singlestatus)
-    // {
-    //     weddingannivrow.style.display = 'block';
-    //     weddingannivrow.classList.add('form-group');
-    //     weddingannivrow.classList.add('row');
-    //     weddingannivrow.classList.add(' wed-status');
-    // }else{
-    //     weddingannivrow.style.display = 'none';
-    // }
-}
+$(function () {
+    $("#wedding_anniversary").datepicker({ maxDate: new Date(),dateFormat: 'dd-mm-yy' });
+    $("#dob").datepicker({ maxDate: new Date(),dateFormat: 'dd-mm-yy' });
+    clearFields();
+});
 
 function isEmail(email) {
     var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     return regex.test(email);
 }
 
-function validate() {
-    var contName = document.getElementById('name').value;
-    var dob = document.getElementById('dob').value;
-    var maleStatus = document.getElementById('male').value;
-    var contactno = document.getElementById('contactno').value;
-    var email = document.getElementById('email').value;
-    var singlestatus = document.getElementById('single').checked;
-    var wedding_anniversary = document.getElementById('wedding_anniversary').value;
+function isNumber(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    return true;
+}
 
-    var facebookurl = document.getElementById('facebookurl').value;
-    var twitterurl = document.getElementById('twitterurl').value;
-    var linkedinurl = document.getElementById('linkedinurl').value;
-    var websiteurl = document.getElementById('websiteurl').value;
-    var blogurl = document.getElementById('blogurl').value;
+function isAlpha(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode== 32 || (charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123)) {
+        return true;
+    }
+    return false;
+}
+function clearFields()
+{
+    document.getElementById('name').value='';
+    document.getElementById('dob').value='';
+    document.getElementById('male').checked= true;
+    document.getElementById('contactno').value='';
+    document.getElementById('email').value='';
+    document.getElementById('single').checked = true;
+    document.getElementById('wedding_anniversary').value='';
+    document.getElementById('facebookurl').value='';
+    document.getElementById('twitterurl').value='';
+    document.getElementById('linkedinurl').value='';
+    document.getElementById('websiteurl').value='';
+    document.getElementById('blogurl').value='';
+    document.getElementById('english').checked = true;
+    document.getElementById('hindi').checked = false;
+    document.getElementById('tamil').checked = false;
+    document.getElementById('subject').value='';
+    document.getElementById('article').value='';
+}
+
+function validate() {
+    var contName = document.getElementById('name').value.trim();
+    var dob = document.getElementById('dob').value.trim();
+    var maleStatus = document.getElementById('male').checked;
+    var contactno = document.getElementById('contactno').value.trim();
+    var email = document.getElementById('email').value.trim();
+    var singlestatus = document.getElementById('single').checked;
+    var wedding_anniversary = document.getElementById('wedding_anniversary').value.trim();
+
+    if(contName=='' || dob =='' || contactno =='' || email=='')
+    {
+        alert('Please fill all mandatory fields');
+        return false;
+    }
+
+    if(isEmail(email) == false)
+    {
+        alert('Please enter valid email');
+        return false;
+    }
+
+    if(singlestatus == false && wedding_anniversary == '')
+    {
+        alert('Please enter Wedding Anniversary');
+        return false;
+    }
+    
+
+    var facebookurl = document.getElementById('facebookurl').value.trim();
+    var twitterurl = document.getElementById('twitterurl').value.trim();
+    var linkedinurl = document.getElementById('linkedinurl').value.trim();
+    var websiteurl = document.getElementById('websiteurl').value.trim();
+    var blogurl = document.getElementById('blogurl').value.trim();
 
     var english = document.getElementById('english').checked;
     var tamil = document.getElementById('tamil').checked;
-    var article = document.getElementById('article').value;
+    var subject = document.getElementById('subject').value.trim();
+    var article = document.getElementById('article').value.trim();
 
-    console.log('Name : ', contName);
-    console.log('Dob : ', dob);
-    console.log('Gender : ', maleStatus ? 'Male' : 'Female');
-    console.log('Contact No : ', contName);
-    console.log('Email : ', email);
-    console.log('Single Status : ', singlestatus);
-    console.log('Wedding Anniv : ', wedding_anniversary);
-    console.log('Facebookurl : ', facebookurl);
-    console.log('Twitter : ', twitterurl);
-    console.log('Linked in : ', linkedinurl);
-    console.log('Website : ', websiteurl);
-    console.log('Blog : ', blogurl);
-    console.log('Language : ', english ? 'English' : tamil ? 'Tamil' : 'Hindi');
-    console.log('Article : ', article);
+    if(article == '')
+    {
+        alert('Please fill content for the subject');
+        return false;  
+    }
 
+    console.log('contName:',contName);
+    console.log('dob:',dob);
+    console.log('maleStatus:',maleStatus);
+    console.log('contactno:',contactno);
+    console.log('email:',email);
+    console.log('singlestatus:',singlestatus);
+    console.log('wedding_anniversary:',wedding_anniversary);
+    console.log('facebookurl:',facebookurl);
+    console.log('twitterurl:',twitterurl);
+    console.log('linkedinurl:',linkedinurl);
+    console.log('websiteurl:',websiteurl);
+    console.log('blogurl:',blogurl);
+    console.log('english:',english);
+    console.log('tamil:',tamil);
+    console.log('subject:',subject);
+    console.log('article:',article);
 
     $.ajax({
         url: 'php/validate_contact.php',
         type: 'POST',
-        data: { "contactNo": "1" },
+        data: { "ContactNo": contactno, "EmailId": email },
         success: function (response) {
+            console.log(response);
             var isContactOK = response;
             if (isContactOK == 'OK') {
                 $.ajax({
-                    url: 'php/db_connection.php',
+                    url: 'php/insert_record.php',
                     type: 'POST',
                     data: {
-                        "Name": name, "Dob": dob, "Gender": (maleStatus ? 'Male' : 'Female'),
-                        "Contact": contactno, "Email": email, "MarriageStatus": (singlestatus  ? 'Single' : 'Married'),
-                        "WeddingAnniv": wedding_anniversary, "FbUrl": facebookurl, "TwUrl": twitterurl, "LinkUrl": linkedinurl,
-                        "WebUrl": websiteurl, "Blog": blogurl, "Lang": (english ? 'English' : tamil ? 'Tamil' : 'Hindi'),
-                        "Article": article
+                        "CName": contName, "DOB": dob, "Gender": (maleStatus ? 'Male' : 'Female'),
+                        "ContactNo": contactno, "EmailId": email, "MaritialStatus": (singlestatus ? 'Single' : 'Married'),
+                        "WedAnniv": wedding_anniversary, "Fburl": facebookurl, "Twurl": twitterurl, "Linurl": linkedinurl,
+                        "Weburl": websiteurl, "Blogurl": blogurl, "CLanguage": (english ? 'English' : tamil ? 'Tamil' : 'Hindi'),
+                        "SubjectTitl":subject,"ArticleText": article
                     },
                     success: function (saveresponse) {
                         console.log(saveresponse)
-                    },
-                });
-                $.ajax({
-                    url: 'php/send_email.php',
-                    type: 'GET',
-                    data: {},
-                    success: function (response) {
-                        alert(response);
+                        if(saveresponse=='SAVED')
+                        {
+                            alert('Submitted successfully');
+                            clearFields();
+                            $.ajax({
+                                url: 'php/send_email.php',
+                                type: 'POST',
+                                data: {
+                                    "CName": contName,"ContactNo": contactno, "EmailId": email,"SubjectTitl":subject,"ArticleText": article
+                                },
+                                success: function (response) {
+                                    console.log(response);
+                                    window.location.href = "https://andamangreenland.in/";
+                                },
+                                error:function(response)
+                                {
+                                    window.location.href = "https://andamangreenland.in/";
+                                }
+                            });
+                        }else{
+                            alert('Please try later');
+                        }
                     },
                 });
             }
+            else{
+                alert('Application for this EmailId or Contact Number already submitted');
+            }
         },
     });
-
-
     return false;
-
 }
